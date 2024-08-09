@@ -5,10 +5,14 @@ const App = () => {
   const [medalData, setMedalData] = useState([]);
   const [medalDataInput, setMedalDataInput] = useState({});
 
+  const submitHandler = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <main>
       <h1 id="title">2024 파리 올림픽</h1>
-      <section id="userInput">
+      <form id="userInput" onSubmit={submitHandler}>
         <MedalInputField
           dataType={"country"}
           medalDataInput={medalDataInput}
@@ -45,15 +49,15 @@ const App = () => {
         >
           국가 추가
         </MedalUpdateButton>
-        <MedalUpdateButton
+        {/* <MedalUpdateButton
           medalData={medalData}
           medalDataInput={medalDataInput}
           setMedalData={setMedalData}
           setMedalDataInput={setMedalDataInput}
         >
           업데이트
-        </MedalUpdateButton>
-      </section>
+        </MedalUpdateButton> */}
+      </form>
       <table>
         <thead>
           <tr>
@@ -131,14 +135,16 @@ function MedalUpdateButton({
   const updateButtonHandler = () => {
     const udpatedMedalData = [...medalData, medalDataInput];
     setMedalDataInput({});
-    console.log(udpatedMedalData);
     setMedalData(udpatedMedalData);
   };
 
   return (
-    <button style={medalUpdateButtonStyle} onClick={updateButtonHandler}>
-      {children}
-    </button>
+    <input
+      type="submit"
+      style={medalUpdateButtonStyle}
+      onClick={updateButtonHandler}
+      value={children}
+    ></input>
   );
 }
 
