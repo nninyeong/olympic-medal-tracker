@@ -3,7 +3,7 @@ import "./App.css";
 
 const App = () => {
   const [medalData, setMedalData] = useState([]);
-  const [newMedalData, setNewMedalData] = useState({});
+  const [medalDataInput, setMedalDataInput] = useState({});
 
   return (
     <main>
@@ -11,39 +11,67 @@ const App = () => {
       <section id="userInput">
         <MedalInputField
           dataType={"country"}
-          newMedalData={newMedalData}
-          setNewMedalData={setNewMedalData}
+          medalDataInput={medalDataInput}
+          setMedalDataInput={setMedalDataInput}
         >
           국가명
         </MedalInputField>
         <MedalInputField
           dataType={"gold"}
-          newMedalData={newMedalData}
-          setNewMedalData={setNewMedalData}
+          medalDataInput={medalDataInput}
+          setMedalDataInput={setMedalDataInput}
         >
           금메달 수
         </MedalInputField>
         <MedalInputField
           dataType={"silver"}
-          newMedalData={newMedalData}
-          setNewMedalData={setNewMedalData}
+          medalDataInput={medalDataInput}
+          setMedalDataInput={setMedalDataInput}
         >
           은메달 수
         </MedalInputField>
         <MedalInputField
           dataType={"bronze"}
-          newMedalData={newMedalData}
-          setNewMedalData={setNewMedalData}
+          medalDataInput={medalDataInput}
+          setMedalDataInput={setMedalDataInput}
         >
           동메달 수
         </MedalInputField>
-        <MedalUpdateButton>국가 추가</MedalUpdateButton>
-        <MedalUpdateButton>업데이트</MedalUpdateButton>
+        <MedalUpdateButton
+          medalData={medalData}
+          medalDataInput={medalDataInput}
+          setMedalData={setMedalData}
+          setMedalDataInput={setMedalDataInput}
+        >
+          국가 추가
+        </MedalUpdateButton>
+        <MedalUpdateButton
+          medalData={medalData}
+          medalDataInput={medalDataInput}
+          setMedalData={setMedalData}
+          setMedalDataInput={setMedalDataInput}
+        >
+          업데이트
+        </MedalUpdateButton>
       </section>
-      <section id="ranking">
-        <div className="ranking" id="rankingHeader"></div>
-        <div className="ranking rankingItem"></div>
-      </section>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">국가명</th>
+            <th scope="col">금메달</th>
+            <th scope="col">은메달</th>
+            <th scope="col">동메달</th>
+            <th scope="col">액션</th>
+          </tr>
+        </thead>
+        <tbody>
+          {medalData.map((data) => {
+            return (
+              <MedalTableRow key={data.country} data={data}></MedalTableRow>
+            );
+          })}
+        </tbody>
+      </table>
     </main>
   );
 };
@@ -51,8 +79,8 @@ const App = () => {
 function MedalInputField({
   dataType,
   children,
-  newMedalData,
-  setNewMedalData,
+  medalDataInput,
+  setMedalDataInput,
 }) {
   const medalInputFieldStyle = {
     width: "100px",
@@ -64,11 +92,12 @@ function MedalInputField({
     height: "20px",
   };
 
+  const defaultValue = dataType === "country" ? "" : 0;
+
   const inputHandler = (event) => {
-    let medalDataInput = newMedalData;
-    medalDataInput[`${dataType}`] = event.currentTarget.value;
-    setNewMedalData(medalDataInput);
-    console.log(newMedalData);
+    let input = { ...medalDataInput };
+    input[`${dataType}`] = event.currentTarget.value;
+    setMedalDataInput(input);
   };
 
   return (
@@ -79,20 +108,52 @@ function MedalInputField({
         id={dataType}
         style={inputFieldStyle}
         onChange={inputHandler}
-        value={newMedalData[`${dataType}`]}
+        value={medalDataInput[`${dataType}`] || defaultValue}
+        placeholder={dataType === "country" ? "국가 입력" : ""}
       ></input>
     </div>
   );
 }
 
-function MedalUpdateButton({ children }) {
+function MedalUpdateButton({
+  children,
+  medalData,
+  medalDataInput,
+  setMedalData,
+  setMedalDataInput,
+}) {
   const medalUpdateButtonStyle = {
     width: "10%",
     height: "20px",
     whiteSpace: "nowrap",
   };
 
-  return <button style={medalUpdateButtonStyle}>{children}</button>;
+  const updateButtonHandler = () => {
+    const udpatedMedalData = [...medalData, medalDataInput];
+    setMedalDataInput({});
+    console.log(udpatedMedalData);
+    setMedalData(udpatedMedalData);
+  };
+
+  return (
+    <button style={medalUpdateButtonStyle} onClick={updateButtonHandler}>
+      {children}
+    </button>
+  );
+}
+
+function MedalTableRow({ data }) {
+  return (
+    <tr>
+      <td>{data.country}</td>
+      <td>{data.gold}</td>
+      <td>{data.silver}</td>
+      <td>{data.bronze}</td>
+      <td>
+        <button></button>
+      </td>
+    </tr>
+  );
 }
 
 export default App;
