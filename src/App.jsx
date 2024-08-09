@@ -142,13 +142,13 @@ function MedalUpdateButton({
   );
 }
 
-function MedalTableRow({ data }) {
+function MedalTableRow({ data: { country, gold, silver, bronze } }) {
   return (
     <tr>
-      <td>{data.country}</td>
-      <td>{data.gold}</td>
-      <td>{data.silver}</td>
-      <td>{data.bronze}</td>
+      <td>{country}</td>
+      <td>{gold}</td>
+      <td>{silver}</td>
+      <td>{bronze}</td>
       <td>
         <button></button>
       </td>
