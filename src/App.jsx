@@ -71,7 +71,7 @@ const App = () => {
         <tbody>
           {medalData.map((data) => {
             return (
-              <MedalTableRow key={data.country} data={data}></MedalTableRow>
+              <MedalTableRow key={data.country} data={data} medalData={medalData} setMedalData={setMedalData}></MedalTableRow>
             );
           })}
         </tbody>
@@ -172,7 +172,12 @@ function MedalUpdateButton({
   );
 }
 
-function MedalTableRow({ data: { country, gold, silver, bronze } }) {
+function MedalTableRow({ data: { country, gold, silver, bronze }, medalData, setMedalData }) {
+  const deleteRow = () => {
+    let filteredData = medalData.filter(data => data.country !== country);
+    setMedalData(filteredData);
+  }
+
   return (
     <tr>
       <td>{country}</td>
@@ -180,7 +185,7 @@ function MedalTableRow({ data: { country, gold, silver, bronze } }) {
       <td>{silver}</td>
       <td>{bronze}</td>
       <td>
-        <button></button>
+        <button type="button" className="deleteRowButton" onClick={deleteRow}>삭제</button>
       </td>
     </tr>
   );
