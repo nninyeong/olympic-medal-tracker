@@ -96,11 +96,11 @@ function MedalInputField({
     height: "20px",
   };
 
-  const defaultValue = dataType === "country" ? "" : 0;
+  const defaultValue = dataType === "country" ? "" : "0";
 
   const inputHandler = (event) => {
     let input = { ...medalDataInput };
-    input[`${dataType}`] = event.currentTarget.value;
+    input[`${dataType}`] = dataType === "country" ? event.currentTarget.value : +event.currentTarget.value;
     setMedalDataInput(input);
   };
 
