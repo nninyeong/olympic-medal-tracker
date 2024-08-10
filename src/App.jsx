@@ -49,14 +49,14 @@ const App = () => {
         >
           국가 추가
         </MedalUpdateButton>
-        {/* <MedalUpdateButton
+        <MedalUpdateButton
           medalData={medalData}
           medalDataInput={medalDataInput}
           setMedalData={setMedalData}
           setMedalDataInput={setMedalDataInput}
         >
           업데이트
-        </MedalUpdateButton> */}
+        </MedalUpdateButton>
       </form>
       <table>
         <thead>
@@ -133,14 +133,28 @@ function MedalUpdateButton({
   };
 
   const updateButtonHandler = () => {
-    const udpatedMedalData = [...medalData, medalDataInput];
+    let updatedMedalData = [];
+    if (children === "업데이트") {
+      const updateCountryData = medalData.find(
+        (data) => data.country === medalDataInput.country
+      );
+
+      for (let key in medalDataInput) {
+        updateCountryData[key] = medalDataInput[key];
+      }
+
+      updatedMedalData = [...medalData];
+    } else {
+      updatedMedalData = [...medalData, medalDataInput];
+    }
+
     setMedalDataInput({});
-    setMedalData(udpatedMedalData);
+    setMedalData(updatedMedalData);
   };
 
   return (
     <input
-      type="submit"
+      type={children === "업데이트" ? "button" : "submit"}
       style={medalUpdateButtonStyle}
       onClick={updateButtonHandler}
       value={children}
