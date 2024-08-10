@@ -16,6 +16,18 @@ main {
   align-items: center;
 }
 
+@media screen and (min-width: 1600px) {
+  main {
+    width: 1200px;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  main {
+    width: 800px;
+  }
+}
+
 main > * {
   width: 100%;
 }
@@ -55,7 +67,7 @@ button {
 }
 
 .medalInputField {
-  width: 120px;
+  width: 15%;
   height: 60px;
 }
 
