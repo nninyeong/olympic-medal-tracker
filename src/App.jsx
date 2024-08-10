@@ -3,7 +3,7 @@ import "./App.css";
 
 const App = () => {
   const [medalData, setMedalData] = useState([]);
-  const [medalDataInput, setMedalDataInput] = useState({});
+  const [medalDataInput, setMedalDataInput] = useState({country: '', gold: 0, silver: 0, bronze: 0});
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -156,7 +156,7 @@ function MedalUpdateButton({
       updatedMedalData = [...medalData, medalDataInput];
     }
 
-    setMedalDataInput({});
+    setMedalDataInput({country: '', gold: 0, silver: 0, bronze: 0});
 
     updatedMedalData = sortData(updatedMedalData);
     setMedalData(updatedMedalData);
