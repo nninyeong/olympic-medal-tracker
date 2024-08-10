@@ -3,8 +3,12 @@ main {
   background: white;
   text-align: center;
 
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(189, 189, 189, 0.743);
+
   position: relative;
   top: 5%;
+  padding: 45px;
 
   display: flex;
   flex-direction: column;
@@ -13,31 +17,89 @@ main {
 }
 
 main > * {
-  width: 80%;
+  width: 100%;
+}
 
-  /* 나중에 지우기 */
-  background: lightgrey;
-  border: 1px solid greenyellow;
+button {
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+
+  border-radius: 4px;
+  font-weight: 900;
 }
 
 #title {
-  font-size: 25px;
-  line-height: 25px;
+  font-size: 32px;
+  line-height: 32px;
   padding: 10px;
-  color: navy;
+  color: rgb(0, 53, 128);
   font-weight: 600;
-}
-
-.ranking {
-  height: 50px;
-  background: lightcyan;
-  border: 1px solid navy;
 }
 
 #userInput {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: flex-end;
-  margin: 5px 0;
+  margin-bottom: 30px;
+  color: rgb(65, 65, 65);
+  font-weight: 600;
+  height: 80px;
+}
+
+#userInput button {
+  width: 10%;
+  background: rgb(255, 223, 16);
+  height: 36px;
+}
+
+.medalInputField {
+  width: 120px;
+  height: 60px;
+}
+
+.medalInputField > input {
+  width: 95%;
+  margin-top: 8px;
+  height: 30px;
+}
+
+#rankingContainer {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#ranking {
+  width: 100%;
+}
+
+#ranking tr {
+  height: 50px;
+  line-height: 50px;
+}
+
+#ranking > thead {
+  background: rgb(0, 53, 128);
+  color: white;
+  font-weight: 600;
+}
+
+#ranking tbody tr:nth-child(2n) {
+  background: rgb(226, 221, 255);
+}
+
+#ranking tbody tr:nth-child(2n + 1) {
+  background: rgb(243, 243, 243);
+}
+
+#ranking tbody tr:hover {
+  background: lightgrey;
+}
+
+#ranking tbody tr button {
+  background: rgb(210, 69, 69);
+  color: white;
+  width: 50px;
+  height: 30px;
 }

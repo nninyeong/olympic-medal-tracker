@@ -58,7 +58,8 @@ const App = () => {
           업데이트
         </MedalUpdateButton>
       </form>
-      <table>
+      <div id="rankingContainer">
+      <table id="ranking">
         <thead>
           <tr>
             <th scope="col">국가명</th>
@@ -76,6 +77,7 @@ const App = () => {
           })}
         </tbody>
       </table>
+      </div>
     </main>
   );
 };
@@ -86,16 +88,6 @@ function MedalInputField({
   medalDataInput,
   setMedalDataInput,
 }) {
-  const medalInputFieldStyle = {
-    width: "100px",
-    height: "40px",
-  };
-
-  const inputFieldStyle = {
-    width: "90%",
-    height: "20px",
-  };
-
   const defaultValue = dataType === "country" ? "" : "0";
 
   const inputHandler = (event) => {
@@ -105,12 +97,12 @@ function MedalInputField({
   };
 
   return (
-    <div style={medalInputFieldStyle}>
+    <div className="medalInputField">
       <h3>{children}</h3>
       <input
         type={dataType === "country" ? "text" : "number"}
         id={dataType}
-        style={inputFieldStyle}
+        // style={inputFieldStyle}
         onChange={inputHandler}
         value={medalDataInput[`${dataType}`] || defaultValue}
         placeholder={dataType === "country" ? "국가 입력" : ""}
@@ -126,12 +118,6 @@ function MedalUpdateButton({
   setMedalData,
   setMedalDataInput,
 }) {
-  const medalUpdateButtonStyle = {
-    width: "10%",
-    height: "20px",
-    whiteSpace: "nowrap",
-  };
-
   const sortData = (data) => {
     return data.sort((a, b) => {
       if(+a.gold !== +b.gold) return b.gold - a.gold;
@@ -174,12 +160,10 @@ function MedalUpdateButton({
   };
 
   return (
-    <input
+    <button
       type={children === "업데이트" ? "button" : "submit"}
-      style={medalUpdateButtonStyle}
       onClick={updateButtonHandler}
-      value={children}
-    ></input>
+    >{children}</button>
   );
 }
 
