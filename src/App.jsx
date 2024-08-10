@@ -132,6 +132,14 @@ function MedalUpdateButton({
     whiteSpace: "nowrap",
   };
 
+  const sortData = (data) => {
+    return data.sort((a, b) => {
+      if(+a.gold !== +b.gold) return b.gold - a.gold;
+      else if(+a.silver !== +b.silver) return b.silver - a.silver;
+      else return b.bronze - a.bronze;
+    });
+  }
+
   const updateButtonHandler = () => {
     let updatedMedalData = [];
     if (children === "업데이트") {
@@ -149,6 +157,8 @@ function MedalUpdateButton({
     }
 
     setMedalDataInput({});
+
+    updatedMedalData = sortData(updatedMedalData);
     setMedalData(updatedMedalData);
   };
 
