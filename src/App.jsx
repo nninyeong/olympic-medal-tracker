@@ -141,6 +141,11 @@ function MedalUpdateButton({
   }
 
   const updateButtonHandler = () => {
+    if(!medalDataInput.country) {
+      alert("국가명을 입력해주세요.");
+      return;
+    }
+
     let updatedMedalData = [];
     if (children === "업데이트") {
       const updateCountryData = medalData.find(
