@@ -158,6 +158,12 @@ function MedalUpdateButton({
 
       updatedMedalData = [...medalData];
     } else {
+      let isDuplicate = medalData.some(data => data.country === medalDataInput.country);
+      if(isDuplicate) {
+        alert("이미 등록된 국가입니다.");
+        return;
+      }
+
       updatedMedalData = [...medalData, medalDataInput];
     }
 
