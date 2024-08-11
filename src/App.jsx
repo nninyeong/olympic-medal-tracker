@@ -14,6 +14,8 @@ const App = () => {
   const [sortOption, setSortOption] = useState("금은동 우선순위 순");
   const [showSortOptionMenu, setShowSortOptionMenu] = useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(true);
+
   const sortData = (data) => {
     let sortedData = [...data];
     if (sortOption === "금은동 우선순위 순") {
@@ -35,6 +37,19 @@ const App = () => {
     let sortedData = sortData(medalData);
     setMedalData(sortedData);
   }, [sortOption]);
+
+  useEffect(() => {
+    if (initialLoad) return;
+    localStorage.setItem("medalData", JSON.stringify(medalData));
+  }, [medalData]);
+
+  useEffect(() => {
+    if (initialLoad && localStorage.getItem("medalData")) {
+      let savedData = JSON.parse(localStorage.getItem("medalData"));
+      setMedalData(savedData);
+      setInitialLoad(false);
+    }
+  });
 
   const submitHandler = (event) => {
     event.preventDefault();
