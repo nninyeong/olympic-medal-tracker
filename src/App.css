@@ -54,7 +54,7 @@ button {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   color: rgb(65, 65, 65);
   font-weight: 600;
   height: 80px;
@@ -75,6 +75,32 @@ button {
   width: 95%;
   margin-top: 8px;
   height: 30px;
+}
+
+#sortOptionDropdown {
+  position: relative;
+  height: 30px;
+}
+
+#sortOptionDropdown > ul {
+  position: absolute;
+  right: 0%;
+}
+
+#sortOptionDropdown ul,
+#sortOptionDropdown li {
+  width: 150px;
+  height: 25px;
+  text-align: right;
+  font-size: 16px;
+  line-height: 25px;
+  border: 1px solid rgb(39, 39, 39);
+  background: white;
+  border-radius: 3px;
+}
+
+#sortOptionDropdown div {
+  padding-right: 5px;
 }
 
 #rankingContainer {

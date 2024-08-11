@@ -91,19 +91,21 @@ const App = () => {
           업데이트
         </MedalUpdateButton>
       </form>
-      <ul
-        id="sortingOptions"
-        onClick={() => setShowSortOptionMenu(!showSortOptionMenu)}
-      >
-        {sortOption}
-        {showSortOptionMenu && (
-          <SortOptionMenu
-            sortOption={sortOption}
-            setSortOption={setSortOption}
-            setShowSortOptionMenu={setShowSortOptionMenu}
-          />
-        )}
-      </ul>
+      <div id="sortOptionDropdown">
+        <ul onClick={() => setShowSortOptionMenu(!showSortOptionMenu)}>
+          <div>
+            {sortOption}
+            {showSortOptionMenu ? "  -" : "  ▾"}
+          </div>
+          {showSortOptionMenu && (
+            <SortOptionMenu
+              sortOption={sortOption}
+              setSortOption={setSortOption}
+              setShowSortOptionMenu={setShowSortOptionMenu}
+            />
+          )}
+        </ul>
+      </div>
       <div id="rankingContainer">
         <table id="ranking">
           <thead>
@@ -259,8 +261,12 @@ function SortOptionMenu({ setSortOption, setShowSortOptionMenu }) {
 
   return (
     <>
-      <li onClick={selectOption}>금은동 우선순위 순</li>
-      <li onClick={selectOption}>총 메달수 순</li>
+      <li>
+        <div onClick={selectOption}>금은동 우선순위 순</div>
+      </li>
+      <li>
+        <div onClick={selectOption}>총 메달수 순</div>
+      </li>
     </>
   );
 }
