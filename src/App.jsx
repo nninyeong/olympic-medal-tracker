@@ -54,6 +54,7 @@ const App = () => {
           medalDataInput={medalDataInput}
           setMedalData={setMedalData}
           setMedalDataInput={setMedalDataInput}
+          sortOption={sortOption}
         >
           국가 추가
         </MedalUpdateButton>
@@ -62,6 +63,7 @@ const App = () => {
           medalDataInput={medalDataInput}
           setMedalData={setMedalData}
           setMedalDataInput={setMedalDataInput}
+          sortOption={sortOption}
         >
           업데이트
         </MedalUpdateButton>
@@ -73,8 +75,11 @@ const App = () => {
         {sortOption}
         {showSortOptionMenu && (
           <SortOptionMenu
+            sortOption={sortOption}
             setSortOption={setSortOption}
             setShowSortOptionMenu={setShowSortOptionMenu}
+            medalData={medalData}
+            setMedalData={setMedalData}
           />
         )}
       </ul>
@@ -145,13 +150,20 @@ function MedalUpdateButton({
   medalDataInput,
   setMedalData,
   setMedalDataInput,
+  sortOption,
 }) {
   const sortData = (data) => {
-    data.sort((a, b) => {
-      if (+a.gold !== +b.gold) return b.gold - a.gold;
-      else if (+a.silver !== +b.silver) return b.silver - a.silver;
-      else return b.bronze - a.bronze;
-    });
+    if (sortOption === "금은동 우선순위 순") {
+      data.sort((a, b) => {
+        if (+a.gold !== +b.gold) return b.gold - a.gold;
+        else if (+a.silver !== +b.silver) return b.silver - a.silver;
+        else return b.bronze - a.bronze;
+      });
+    } else if (sortOption === "총 메달수 순") {
+      data.sort((a, b) => {
+        return b.total - a.total;
+      });
+    }
   };
 
   const countTotalMedal = (data) => {
@@ -232,11 +244,39 @@ function MedalTableRow({
   );
 }
 
-function SortOptionMenu({ setSortOption, setShowSortOptionMenu }) {
+function SortOptionMenu({
+  setSortOption,
+  setShowSortOptionMenu,
+  medalData,
+  setMedalData,
+}) {
+  let sortOption;
+
   const selectOption = (event) => {
     setSortOption(event.currentTarget.innerText);
+    sortOption = event.currentTarget.innerText;
+
+    let sortedData = [...medalData];
+    sortData(sortedData);
+    setMedalData(sortedData);
+
     setShowSortOptionMenu(false);
   };
+
+  const sortData = (data) => {
+    if (sortOption === "금은동 우선순위 순") {
+      data.sort((a, b) => {
+        if (+a.gold !== +b.gold) return b.gold - a.gold;
+        else if (+a.silver !== +b.silver) return b.silver - a.silver;
+        else return b.bronze - a.bronze;
+      });
+    } else if (sortOption === "총 메달수 순") {
+      data.sort((a, b) => {
+        return b.total - a.total;
+      });
+    }
+  };
+
   return (
     <>
       <li onClick={selectOption}>금은동 우선순위 순</li>
