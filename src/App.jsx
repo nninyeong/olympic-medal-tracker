@@ -147,7 +147,7 @@ function MedalUpdateButton({
   setMedalDataInput,
 }) {
   const sortData = (data) => {
-    return data.sort((a, b) => {
+    data.sort((a, b) => {
       if (+a.gold !== +b.gold) return b.gold - a.gold;
       else if (+a.silver !== +b.silver) return b.silver - a.silver;
       else return b.bronze - a.bronze;
@@ -192,7 +192,7 @@ function MedalUpdateButton({
 
     setMedalDataInput({ country: "", gold: 0, silver: 0, bronze: 0, total: 0 });
 
-    updatedMedalData = sortData(updatedMedalData);
+    sortData(updatedMedalData);
     setMedalData(updatedMedalData);
   };
 
