@@ -10,6 +10,8 @@ const App = () => {
     bronze: 0,
     total: 0,
   });
+  const [sortOption, setSortOption] = useState("금은동 우선순위 순");
+  const [showSortOptionMenu, setShowSortOptionMenu] = useState(false);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -64,6 +66,18 @@ const App = () => {
           업데이트
         </MedalUpdateButton>
       </form>
+      <ul
+        id="sortingOptions"
+        onClick={() => setShowSortOptionMenu(!showSortOptionMenu)}
+      >
+        {sortOption}
+        {showSortOptionMenu && (
+          <SortOptionMenu
+            setSortOption={setSortOption}
+            setShowSortOptionMenu={setShowSortOptionMenu}
+          />
+        )}
+      </ul>
       <div id="rankingContainer">
         <table id="ranking">
           <thead>
@@ -215,6 +229,19 @@ function MedalTableRow({
         </button>
       </td>
     </tr>
+  );
+}
+
+function SortOptionMenu({ setSortOption, setShowSortOptionMenu }) {
+  const selectOption = (event) => {
+    setSortOption(event.currentTarget.innerText);
+    setShowSortOptionMenu(false);
+  };
+  return (
+    <>
+      <li onClick={selectOption}>금은동 우선순위 순</li>
+      <li onClick={selectOption}>총 메달수 순</li>
+    </>
   );
 }
 
