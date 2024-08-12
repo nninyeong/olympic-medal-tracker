@@ -1,11 +1,13 @@
 #sortOptionDropdown {
   position: relative;
-  height: 30px;
+  height: 50px;
 }
 
 #sortOptionDropdown > ul {
   position: absolute;
   right: 0%;
+  top: 50%;
+  translate: 0 -50%;
 }
 
 #sortOptionDropdown ul,

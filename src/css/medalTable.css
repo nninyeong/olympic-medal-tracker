@@ -1,6 +1,9 @@
 #rankingTable {
   border-radius: 8px;
   overflow: hidden;
+
+  max-height: 700px;
+  overflow-y: auto;
 }
 
 #ranking {
@@ -16,6 +19,9 @@
   background: rgb(0, 53, 128);
   color: white;
   font-weight: 600;
+
+  position: sticky;
+  top: 0;
 }
 
 #ranking tbody tr:nth-child(2n) {
