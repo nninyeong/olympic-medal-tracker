@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import MedalInputField from "./Components/MedalInputField.jsx";
+import MedalUpdateButton from "./Components/MedalUpdateButton.jsx";
+import SortOptionMenu from "./Components/SortOptionMenu.jsx";
+import MedalTableRow from "./Components/MedalTableRow.jsx";
 
 const App = () => {
   const [medalData, setMedalData] = useState([]);
@@ -150,140 +154,5 @@ const App = () => {
     </main>
   );
 };
-
-function MedalInputField({
-  dataType,
-  children,
-  medalDataInput,
-  setMedalDataInput,
-}) {
-  const defaultValue = dataType === "country" ? "" : "0";
-
-  const inputHandler = (event) => {
-    let input = { ...medalDataInput };
-    input[`${dataType}`] =
-      dataType === "country"
-        ? event.currentTarget.value
-        : +event.currentTarget.value;
-    setMedalDataInput(input);
-  };
-
-  return (
-    <div className="medalInputField">
-      <h3>{children}</h3>
-      <input
-        type={dataType === "country" ? "text" : "number"}
-        id={dataType}
-        onChange={inputHandler}
-        value={medalDataInput[`${dataType}`] || defaultValue}
-        placeholder={dataType === "country" ? "국가 입력" : ""}
-      ></input>
-    </div>
-  );
-}
-
-function MedalUpdateButton({
-  children,
-  medalData,
-  medalDataInput,
-  setMedalData,
-  setMedalDataInput,
-  sortData,
-}) {
-  const countTotalMedal = (data) => {
-    data.total = 0;
-    data.total += data.gold + data.silver + data.bronze;
-  };
-
-  const updateButtonHandler = () => {
-    if (!medalDataInput.country) {
-      alert("국가명을 입력해주세요.");
-      return;
-    }
-
-    let updatedMedalData = [];
-    if (children === "업데이트") {
-      const updateCountryData = medalData.find(
-        (data) => data.country === medalDataInput.country
-      );
-
-      for (let key in medalDataInput) {
-        updateCountryData[key] = medalDataInput[key];
-      }
-
-      countTotalMedal(updateCountryData);
-      updatedMedalData = [...medalData];
-    } else {
-      let isDuplicate = medalData.some(
-        (data) => data.country === medalDataInput.country
-      );
-      if (isDuplicate) {
-        alert("이미 등록된 국가입니다.");
-        return;
-      }
-
-      countTotalMedal(medalDataInput);
-      updatedMedalData = [...medalData, medalDataInput];
-    }
-
-    setMedalDataInput({ country: "", gold: 0, silver: 0, bronze: 0, total: 0 });
-
-    updatedMedalData = sortData(updatedMedalData);
-    setMedalData(updatedMedalData);
-  };
-
-  return (
-    <button
-      type={children === "업데이트" ? "button" : "submit"}
-      onClick={updateButtonHandler}
-    >
-      {children}
-    </button>
-  );
-}
-
-function MedalTableRow({
-  data: { country, gold, silver, bronze, total },
-  medalData,
-  setMedalData,
-}) {
-  const deleteRow = () => {
-    let filteredData = medalData.filter((data) => data.country !== country);
-    setMedalData(filteredData);
-  };
-
-  return (
-    <tr>
-      <td>{country}</td>
-      <td>{gold}</td>
-      <td>{silver}</td>
-      <td>{bronze}</td>
-      <td>{total}</td>
-      <td>
-        <button type="button" className="deleteRowButton" onClick={deleteRow}>
-          삭제
-        </button>
-      </td>
-    </tr>
-  );
-}
-
-function SortOptionMenu({ setSortOption, setShowSortOptionMenu }) {
-  const selectOption = (event) => {
-    setSortOption(event.currentTarget.innerText);
-    setShowSortOptionMenu(false);
-  };
-
-  return (
-    <>
-      <li>
-        <div onClick={selectOption}>금은동 우선순위 순</div>
-      </li>
-      <li>
-        <div onClick={selectOption}>총 메달수 순</div>
-      </li>
-    </>
-  );
-}
 
 export default App;
