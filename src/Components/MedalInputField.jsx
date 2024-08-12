@@ -1,9 +1,4 @@
-function MedalInputField({
-  dataType,
-  children,
-  medalDataInput,
-  setMedalDataInput,
-}) {
+function MedalInputField({ dataType, medalDataInput, setMedalDataInput }) {
   const inputHandler = (event) => {
     let input = { ...medalDataInput };
     input[dataType] = event.currentTarget.value;
