@@ -18,34 +18,17 @@ function Form({ medalData, setMedalData, sortData }) {
 
   return (
     <form id="userInput" onSubmit={submitHandler}>
-      <MedalInputField
-        dataType={"country"}
-        medalDataInput={medalDataInput}
-        setMedalDataInput={setMedalDataInput}
-      >
-        국가명
-      </MedalInputField>
-      <MedalInputField
-        dataType={"gold"}
-        medalDataInput={medalDataInput}
-        setMedalDataInput={setMedalDataInput}
-      >
-        금메달 수
-      </MedalInputField>
-      <MedalInputField
-        dataType={"silver"}
-        medalDataInput={medalDataInput}
-        setMedalDataInput={setMedalDataInput}
-      >
-        은메달 수
-      </MedalInputField>
-      <MedalInputField
-        dataType={"bronze"}
-        medalDataInput={medalDataInput}
-        setMedalDataInput={setMedalDataInput}
-      >
-        동메달 수
-      </MedalInputField>
+      {Object.keys(medalDataInput).map((key) => {
+        if (key === "total") return;
+
+        return (
+          <MedalInputField
+            dataType={key}
+            medalDataInput={medalDataInput}
+            setMedalDataInput={setMedalDataInput}
+          />
+        );
+      })}
       <MedalUpdateButton
         medalData={medalData}
         medalDataInput={medalDataInput}

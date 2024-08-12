@@ -10,9 +10,16 @@ function MedalInputField({
     setMedalDataInput(input);
   };
 
+  const fieldTitle = {
+    country: "국가명",
+    gold: "금메달 수",
+    silver: "은메달 수",
+    bronze: "동메달 수",
+  };
+
   return (
     <div className="medalInputField">
-      <h3>{children}</h3>
+      <h3>{fieldTitle[dataType]}</h3>
       <input
         type={dataType === "country" ? "text" : "number"}
         id={dataType}
