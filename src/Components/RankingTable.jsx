@@ -1,4 +1,5 @@
 import MedalTableRow from "./MedalTableRow";
+import "../css/medalTable.css";
 
 function RankingTable({ medalData, setMedalData }) {
   return (
