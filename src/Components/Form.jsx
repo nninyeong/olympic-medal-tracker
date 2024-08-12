@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MedalInputField from "./MedalInputField.jsx";
 import MedalUpdateButton from "./MedalUpdateButton.jsx";
+import "../css/form.css";
 
 function Form({ medalData, setMedalData, sortData }) {
   const submitHandler = (event) => {

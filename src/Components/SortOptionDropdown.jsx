@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SortOptionMenu from "./SortOptionMenu.jsx";
+import "../css/sortOptionDropdown.css";
 
 function SortOptionDropdown({ sortOption, setSortOption }) {
   const [showSortOptionMenu, setShowSortOptionMenu] = useState(false);

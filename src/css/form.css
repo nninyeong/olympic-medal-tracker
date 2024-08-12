@@ -1,0 +1,27 @@
+#userInput {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 10px;
+  color: rgb(65, 65, 65);
+  font-weight: 600;
+  height: 80px;
+}
+
+#userInput button {
+  width: 10%;
+  background: rgb(255, 223, 16);
+  height: 36px;
+}
+
+.medalInputField {
+  width: 15%;
+  height: 60px;
+}
+
+.medalInputField > input {
+  width: 95%;
+  margin-top: 8px;
+  height: 30px;
+}
