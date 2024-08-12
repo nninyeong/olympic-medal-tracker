@@ -23,6 +23,7 @@ function Form({ medalData, setMedalData, sortData }) {
 
         return (
           <MedalInputField
+            key={key}
             dataType={key}
             medalDataInput={medalDataInput}
             setMedalDataInput={setMedalDataInput}
