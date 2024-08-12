@@ -3,6 +3,7 @@ import "./css/App.css";
 import SortOptionDropdown from "./Components/SortOptionDropdown.jsx";
 import RankingTable from "./Components/RankingTable.jsx";
 import Form from "./Components/Form.jsx";
+import InputGuidance from "./Components/InputGuidance.jsx";
 
 const App = () => {
   const [medalData, setMedalData] = useState([]);
@@ -59,7 +60,11 @@ const App = () => {
         sortOption={sortOption}
         setSortOption={setSortOption}
       />
-      <RankingTable medalData={medalData} setMedalData={setMedalData} />
+      {medalData.length === 0 ? (
+        <InputGuidance />
+      ) : (
+        <RankingTable medalData={medalData} setMedalData={setMedalData} />
+      )}
     </main>
   );
 };
