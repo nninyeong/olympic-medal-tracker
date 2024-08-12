@@ -1,19 +1,11 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import MedalInputField from "./Components/MedalInputField.jsx";
-import MedalUpdateButton from "./Components/MedalUpdateButton.jsx";
 import SortOptionMenu from "./Components/SortOptionMenu.jsx";
 import MedalTableRow from "./Components/MedalTableRow.jsx";
+import Form from "./Components/Form.jsx";
 
 const App = () => {
   const [medalData, setMedalData] = useState([]);
-  const [medalDataInput, setMedalDataInput] = useState({
-    country: "",
-    gold: 0,
-    silver: 0,
-    bronze: 0,
-    total: 0,
-  });
 
   const [sortOption, setSortOption] = useState("금은동 우선순위 순");
   const [showSortOptionMenu, setShowSortOptionMenu] = useState(false);
@@ -55,61 +47,15 @@ const App = () => {
     }
   });
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-  };
-
   return (
     <main>
       <h1 id="title">2024 파리 올림픽</h1>
-      <form id="userInput" onSubmit={submitHandler}>
-        <MedalInputField
-          dataType={"country"}
-          medalDataInput={medalDataInput}
-          setMedalDataInput={setMedalDataInput}
-        >
-          국가명
-        </MedalInputField>
-        <MedalInputField
-          dataType={"gold"}
-          medalDataInput={medalDataInput}
-          setMedalDataInput={setMedalDataInput}
-        >
-          금메달 수
-        </MedalInputField>
-        <MedalInputField
-          dataType={"silver"}
-          medalDataInput={medalDataInput}
-          setMedalDataInput={setMedalDataInput}
-        >
-          은메달 수
-        </MedalInputField>
-        <MedalInputField
-          dataType={"bronze"}
-          medalDataInput={medalDataInput}
-          setMedalDataInput={setMedalDataInput}
-        >
-          동메달 수
-        </MedalInputField>
-        <MedalUpdateButton
-          medalData={medalData}
-          medalDataInput={medalDataInput}
-          setMedalData={setMedalData}
-          setMedalDataInput={setMedalDataInput}
-          sortData={sortData}
-        >
-          국가 추가
-        </MedalUpdateButton>
-        <MedalUpdateButton
-          medalData={medalData}
-          medalDataInput={medalDataInput}
-          setMedalData={setMedalData}
-          setMedalDataInput={setMedalDataInput}
-          sortData={sortData}
-        >
-          업데이트
-        </MedalUpdateButton>
-      </form>
+      <Form
+        id="userInput"
+        medalData={medalData}
+        setMedalData={setMedalData}
+        sortData={sortData}
+      />
       <div id="sortOptionDropdown">
         <ul onClick={() => setShowSortOptionMenu(!showSortOptionMenu)}>
           <div>
