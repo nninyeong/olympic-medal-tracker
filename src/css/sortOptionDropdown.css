@@ -1,6 +1,7 @@
 #sortOptionDropdown {
   position: relative;
   height: 50px;
+  z-index: 999;
 }
 
 #sortOptionDropdown > ul {
@@ -20,6 +21,11 @@
   border: 1px solid rgb(39, 39, 39);
   background: white;
   border-radius: 3px;
+  cursor: pointer;
+}
+
+#sortOptionDropdown li:hover {
+  background: rgb(227, 227, 227);
 }
 
 #sortOptionDropdown div {
