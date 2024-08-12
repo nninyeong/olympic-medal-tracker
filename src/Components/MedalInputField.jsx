@@ -4,14 +4,9 @@ function MedalInputField({
   medalDataInput,
   setMedalDataInput,
 }) {
-  const defaultValue = dataType === "country" ? "" : "0";
-
   const inputHandler = (event) => {
     let input = { ...medalDataInput };
-    input[`${dataType}`] =
-      dataType === "country"
-        ? event.currentTarget.value
-        : +event.currentTarget.value;
+    input[dataType] = event.currentTarget.value;
     setMedalDataInput(input);
   };
 
@@ -22,7 +17,7 @@ function MedalInputField({
         type={dataType === "country" ? "text" : "number"}
         id={dataType}
         onChange={inputHandler}
-        value={medalDataInput[`${dataType}`] || defaultValue}
+        value={medalDataInput[dataType]}
         placeholder={dataType === "country" ? "국가 입력" : ""}
       ></input>
     </div>

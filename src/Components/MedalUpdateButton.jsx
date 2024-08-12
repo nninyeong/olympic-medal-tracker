@@ -11,6 +11,12 @@ function MedalUpdateButton({
     data.total += data.gold + data.silver + data.bronze;
   };
 
+  const convertValuesToNumber = (data) => {
+    data.gold = +data.gold;
+    data.silver = +data.silver;
+    data.bronze = +data.bronze;
+  };
+
   const updateButtonHandler = () => {
     if (!medalDataInput.country) {
       alert("국가명을 입력해주세요.");
@@ -27,6 +33,7 @@ function MedalUpdateButton({
         updateCountryData[key] = medalDataInput[key];
       }
 
+      convertValuesToNumber(updateCountryData);
       countTotalMedal(updateCountryData);
       updatedMedalData = [...medalData];
     } else {
@@ -38,11 +45,18 @@ function MedalUpdateButton({
         return;
       }
 
+      convertValuesToNumber(medalDataInput);
       countTotalMedal(medalDataInput);
       updatedMedalData = [...medalData, medalDataInput];
     }
 
-    setMedalDataInput({ country: "", gold: 0, silver: 0, bronze: 0, total: 0 });
+    setMedalDataInput({
+      country: "",
+      gold: "0",
+      silver: "0",
+      bronze: "0",
+      total: "0",
+    });
 
     updatedMedalData = sortData(updatedMedalData);
     setMedalData(updatedMedalData);
