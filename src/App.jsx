@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import "./css/App.css";
-import SortOptionMenu from "./Components/SortOptionMenu.jsx";
-import MedalTableRow from "./Components/MedalTableRow.jsx";
+import SortOptionDropdown from "./Components/SortOptionDropdown.jsx";
+import RankingTable from "./Components/RankingTable.jsx";
 import Form from "./Components/Form.jsx";
 
 const App = () => {
   const [medalData, setMedalData] = useState([]);
 
   const [sortOption, setSortOption] = useState("금은동 우선순위 순");
-  const [showSortOptionMenu, setShowSortOptionMenu] = useState(false);
 
   const [initialLoad, setInitialLoad] = useState(true);
 
@@ -56,47 +55,11 @@ const App = () => {
         setMedalData={setMedalData}
         sortData={sortData}
       />
-      <div id="sortOptionDropdown">
-        <ul onClick={() => setShowSortOptionMenu(!showSortOptionMenu)}>
-          <div>
-            {sortOption}
-            {showSortOptionMenu ? "  -" : "  ▾"}
-          </div>
-          {showSortOptionMenu && (
-            <SortOptionMenu
-              sortOption={sortOption}
-              setSortOption={setSortOption}
-              setShowSortOptionMenu={setShowSortOptionMenu}
-            />
-          )}
-        </ul>
-      </div>
-      <div id="rankingContainer">
-        <table id="ranking">
-          <thead>
-            <tr>
-              <th scope="col">국가명</th>
-              <th scope="col">금메달</th>
-              <th scope="col">은메달</th>
-              <th scope="col">동메달</th>
-              <th scope="col">총 메달수</th>
-              <th scope="col">액션</th>
-            </tr>
-          </thead>
-          <tbody>
-            {medalData.map((data) => {
-              return (
-                <MedalTableRow
-                  key={data.country}
-                  data={data}
-                  medalData={medalData}
-                  setMedalData={setMedalData}
-                ></MedalTableRow>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <SortOptionDropdown
+        sortOption={sortOption}
+        setSortOption={setSortOption}
+      />
+      <RankingTable medalData={medalData} setMedalData={setMedalData} />
     </main>
   );
 };

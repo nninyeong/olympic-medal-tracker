@@ -1,4 +1,4 @@
-// import "../medalTable.css";
+import "../css/medalTable.css";
 
 function MedalTableRow({
   data: { country, gold, silver, bronze, total },
