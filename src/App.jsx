@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+import "./css/App.css";
 import SortOptionMenu from "./Components/SortOptionMenu.jsx";
 import MedalTableRow from "./Components/MedalTableRow.jsx";
 import Form from "./Components/Form.jsx";
