@@ -4,7 +4,7 @@ import MedalUpdateButton from "./MedalUpdateButton.jsx";
 import "../css/form.css";
 
 function Form({ medalData, setMedalData, sortData }) {
-  const submitHandler = (event) => {
+  const preventDefault = (event) => {
     event.preventDefault();
   };
 
@@ -16,8 +16,18 @@ function Form({ medalData, setMedalData, sortData }) {
     total: "0",
   });
 
+  const initializeInput = () => {
+    setMedalDataInput({
+      country: "",
+      gold: "0",
+      silver: "0",
+      bronze: "0",
+      total: "0",
+    });
+  };
+
   return (
-    <form id="userInput" onSubmit={submitHandler}>
+    <form id="userInput" onSubmit={preventDefault}>
       {Object.keys(medalDataInput).map((key) => {
         if (key === "total") return;
 
@@ -36,6 +46,7 @@ function Form({ medalData, setMedalData, sortData }) {
         setMedalData={setMedalData}
         setMedalDataInput={setMedalDataInput}
         sortData={sortData}
+        initializeInput={initializeInput}
       >
         국가 추가
       </MedalUpdateButton>
@@ -45,6 +56,7 @@ function Form({ medalData, setMedalData, sortData }) {
         setMedalData={setMedalData}
         setMedalDataInput={setMedalDataInput}
         sortData={sortData}
+        initializeInput={initializeInput}
       >
         업데이트
       </MedalUpdateButton>

@@ -5,6 +5,7 @@ function MedalUpdateButton({
   setMedalData,
   setMedalDataInput,
   sortData,
+  initializeInput,
 }) {
   const countTotalMedal = (data) => {
     data.total = 0;
@@ -50,13 +51,7 @@ function MedalUpdateButton({
       updatedMedalData = [...medalData, medalDataInput];
     }
 
-    setMedalDataInput({
-      country: "",
-      gold: "0",
-      silver: "0",
-      bronze: "0",
-      total: "0",
-    });
+    initializeInput();
 
     updatedMedalData = sortData(updatedMedalData);
     setMedalData(updatedMedalData);
