@@ -4,6 +4,7 @@ import SortOptionDropdown from "./Components/SortOptionDropdown.jsx";
 import RankingTable from "./Components/RankingTable.jsx";
 import MedalForm from "./Components/Form.jsx";
 import InputGuidance from "./Components/InputGuidance.jsx";
+import { formValidation } from "./util.js";
 
 const App = () => {
   const [medalData, setMedalData] = useState([]);
@@ -31,16 +32,6 @@ const App = () => {
 
   const inputHandler = (event) => {
     const { value, id } = event.currentTarget;
-    const isNumber = (value) => {
-      const regex = /^\d+$/;
-      return regex.test(value);
-    };
-
-    if (id !== "country" && !isNumber(value)) {
-      alert("메달 수에는 숫자만 입력해주세요!");
-      return;
-    }
-
     let input = { ...medalDataInput };
     input[id] = value;
     setMedalDataInput(input);
@@ -77,8 +68,9 @@ const App = () => {
   const updateButtonHandler = (event) => {
     const name = event.currentTarget.name;
 
-    if (!medalDataInput.country) {
-      alert("국가명을 입력해주세요.");
+    const { isValid, message } = formValidation(medalDataInput);
+    if (!isValid) {
+      alert(message);
       return;
     }
 
