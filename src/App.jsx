@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./css/App.css";
 import SortOptionDropdown from "./Components/SortOptionDropdown.jsx";
 import RankingTable from "./Components/RankingTable.jsx";
-import MedalForm from "./Components/Form.jsx";
+import MedalForm from "./Components/MedalForm.jsx";
 import InputGuidance from "./Components/InputGuidance.jsx";
 import { formValidation } from "./util.js";
 
