@@ -1,13 +1,7 @@
 function MedalTableRow({
   data: { country, gold, silver, bronze, total },
-  medalData,
-  setMedalData,
+  deleteHandler,
 }) {
-  const deleteRow = () => {
-    let filteredData = medalData.filter((data) => data.country !== country);
-    setMedalData(filteredData);
-  };
-
   return (
     <tr>
       <td>{country}</td>
@@ -16,7 +10,11 @@ function MedalTableRow({
       <td>{bronze}</td>
       <td>{total}</td>
       <td>
-        <button type="button" className="deleteRowButton" onClick={deleteRow}>
+        <button
+          type="button"
+          className="deleteRowButton"
+          onClick={() => deleteHandler(country)}
+        >
           삭제
         </button>
       </td>

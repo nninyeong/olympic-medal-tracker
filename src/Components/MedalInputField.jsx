@@ -1,30 +1,14 @@
-function MedalInputField({ dataType, medalDataInput, setMedalDataInput }) {
-  const isNumber = (value) => {
-    const regex = /^\d+$/;
-    return regex.test(value);
-  };
+const FIELD_TITLE = {
+  country: "국가명",
+  gold: "금메달 수",
+  silver: "은메달 수",
+  bronze: "동메달 수",
+};
 
-  const inputHandler = (event) => {
-    if (dataType !== "country" && !isNumber(event.currentTarget.value)) {
-      alert("메달 수에는 숫자만 입력해주세요!");
-      return;
-    }
-
-    let input = { ...medalDataInput };
-    input[dataType] = event.currentTarget.value;
-    setMedalDataInput(input);
-  };
-
-  const fieldTitle = {
-    country: "국가명",
-    gold: "금메달 수",
-    silver: "은메달 수",
-    bronze: "동메달 수",
-  };
-
+function MedalInputField({ dataType, medalDataInput, inputHandler }) {
   return (
     <div className="medalInputField">
-      <h3>{fieldTitle[dataType]}</h3>
+      <h3>{FIELD_TITLE[dataType]}</h3>
       <input
         type="text"
         id={dataType}

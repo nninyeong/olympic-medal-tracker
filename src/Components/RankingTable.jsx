@@ -1,7 +1,7 @@
 import MedalTableRow from "./MedalTableRow";
 import "../css/medalTable.css";
 
-function RankingTable({ medalData, setMedalData }) {
+function RankingTable({ medalData, deleteHandler }) {
   return (
     <div id="rankingTable">
       <table id="ranking">
@@ -21,8 +21,7 @@ function RankingTable({ medalData, setMedalData }) {
               <MedalTableRow
                 key={data.country}
                 data={data}
-                medalData={medalData}
-                setMedalData={setMedalData}
+                deleteHandler={deleteHandler}
               ></MedalTableRow>
             );
           })}

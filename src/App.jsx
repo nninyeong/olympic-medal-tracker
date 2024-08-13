@@ -2,15 +2,49 @@ import { useState, useEffect } from "react";
 import "./css/App.css";
 import SortOptionDropdown from "./Components/SortOptionDropdown.jsx";
 import RankingTable from "./Components/RankingTable.jsx";
-import Form from "./Components/Form.jsx";
+import MedalForm from "./Components/Form.jsx";
 import InputGuidance from "./Components/InputGuidance.jsx";
 
 const App = () => {
   const [medalData, setMedalData] = useState([]);
+  const [medalDataInput, setMedalDataInput] = useState({
+    country: "",
+    gold: "0",
+    silver: "0",
+    bronze: "0",
+    total: "0",
+  });
+
+  const initializeInput = () => {
+    setMedalDataInput({
+      country: "",
+      gold: "0",
+      silver: "0",
+      bronze: "0",
+      total: "0",
+    });
+  };
 
   const [sortOption, setSortOption] = useState("금은동 우선순위 순");
 
   const [initialLoad, setInitialLoad] = useState(true);
+
+  const inputHandler = (event) => {
+    const { value, id } = event.currentTarget;
+    const isNumber = (value) => {
+      const regex = /^\d+$/;
+      return regex.test(value);
+    };
+
+    if (id !== "country" && !isNumber(value)) {
+      alert("메달 수에는 숫자만 입력해주세요!");
+      return;
+    }
+
+    let input = { ...medalDataInput };
+    input[id] = value;
+    setMedalDataInput(input);
+  };
 
   const sortData = (data) => {
     let sortedData = [...data];
@@ -27,6 +61,65 @@ const App = () => {
     }
 
     return sortedData;
+  };
+
+  const countTotalMedal = (data) => {
+    data.total = 0;
+    data.total += data.gold + data.silver + data.bronze;
+  };
+
+  const convertValuesToNumber = (data) => {
+    data.gold = +data.gold;
+    data.silver = +data.silver;
+    data.bronze = +data.bronze;
+  };
+
+  const updateButtonHandler = (event) => {
+    const name = event.currentTarget.name;
+
+    if (!medalDataInput.country) {
+      alert("국가명을 입력해주세요.");
+      return;
+    }
+
+    let updatedMedalData = [];
+    if (name === "업데이트") {
+      const updateCountryData = medalData.find(
+        (data) => data.country === medalDataInput.country
+      );
+
+      for (let key in medalDataInput) {
+        updateCountryData[key] = medalDataInput[key];
+      }
+
+      convertValuesToNumber(updateCountryData);
+      countTotalMedal(updateCountryData);
+      updatedMedalData = [...medalData];
+    } else {
+      let isDuplicate = medalData.some(
+        (data) => data.country === medalDataInput.country
+      );
+      if (isDuplicate) {
+        alert("이미 등록된 국가입니다.");
+        return;
+      }
+
+      convertValuesToNumber(medalDataInput);
+      countTotalMedal(medalDataInput);
+      updatedMedalData = [...medalData, medalDataInput];
+    }
+
+    initializeInput();
+
+    updatedMedalData = sortData(updatedMedalData);
+    setMedalData(updatedMedalData);
+  };
+
+  const deleteHandler = (selectedCountry) => {
+    let filteredData = medalData.filter(
+      (data) => data.country !== selectedCountry
+    );
+    setMedalData(filteredData);
   };
 
   useEffect(() => {
@@ -50,11 +143,14 @@ const App = () => {
   return (
     <main>
       <h1 id="title">2024 파리 올림픽</h1>
-      <Form
+      <MedalForm
         id="userInput"
         medalData={medalData}
         setMedalData={setMedalData}
-        sortData={sortData}
+        medalDataInput={medalDataInput}
+        setMedalDataInput={setMedalDataInput}
+        updateButtonHandler={updateButtonHandler}
+        inputHandler={inputHandler}
       />
       <SortOptionDropdown
         sortOption={sortOption}
@@ -63,7 +159,7 @@ const App = () => {
       {medalData.length === 0 ? (
         <InputGuidance />
       ) : (
-        <RankingTable medalData={medalData} setMedalData={setMedalData} />
+        <RankingTable medalData={medalData} deleteHandler={deleteHandler} />
       )}
     </main>
   );

@@ -1,29 +1,17 @@
-import { useState } from "react";
 import MedalInputField from "./MedalInputField.jsx";
 import MedalUpdateButton from "./MedalUpdateButton.jsx";
 import "../css/form.css";
 
-function Form({ medalData, setMedalData, sortData }) {
+function MedalForm({
+  medalData,
+  setMedalData,
+  medalDataInput,
+  setMedalDataInput,
+  updateButtonHandler,
+  inputHandler,
+}) {
   const preventDefault = (event) => {
     event.preventDefault();
-  };
-
-  const [medalDataInput, setMedalDataInput] = useState({
-    country: "",
-    gold: "0",
-    silver: "0",
-    bronze: "0",
-    total: "0",
-  });
-
-  const initializeInput = () => {
-    setMedalDataInput({
-      country: "",
-      gold: "0",
-      silver: "0",
-      bronze: "0",
-      total: "0",
-    });
   };
 
   return (
@@ -37,6 +25,7 @@ function Form({ medalData, setMedalData, sortData }) {
             dataType={key}
             medalDataInput={medalDataInput}
             setMedalDataInput={setMedalDataInput}
+            inputHandler={inputHandler}
           />
         );
       })}
@@ -44,9 +33,7 @@ function Form({ medalData, setMedalData, sortData }) {
         medalData={medalData}
         medalDataInput={medalDataInput}
         setMedalData={setMedalData}
-        setMedalDataInput={setMedalDataInput}
-        sortData={sortData}
-        initializeInput={initializeInput}
+        updateButtonHandler={updateButtonHandler}
       >
         국가 추가
       </MedalUpdateButton>
@@ -54,9 +41,7 @@ function Form({ medalData, setMedalData, sortData }) {
         medalData={medalData}
         medalDataInput={medalDataInput}
         setMedalData={setMedalData}
-        setMedalDataInput={setMedalDataInput}
-        sortData={sortData}
-        initializeInput={initializeInput}
+        updateButtonHandler={updateButtonHandler}
       >
         업데이트
       </MedalUpdateButton>
@@ -64,4 +49,4 @@ function Form({ medalData, setMedalData, sortData }) {
   );
 }
 
-export default Form;
+export default MedalForm;
