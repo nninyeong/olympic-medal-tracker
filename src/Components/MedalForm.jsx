@@ -2,14 +2,18 @@ import MedalInputField from "./MedalInputField.jsx";
 import MedalUpdateButton from "./MedalUpdateButton.jsx";
 import "../css/form.css";
 
-function MedalForm({
-  medalData,
-  setMedalData,
-  medalDataInput,
-  setMedalDataInput,
-  updateButtonHandler,
-  inputHandler,
-}) {
+const UPDATE_BUTTONS = [
+  {
+    type: "submit",
+    name: "국가 추가",
+  },
+  {
+    type: "button",
+    name: "업데이트",
+  },
+];
+
+function MedalForm({ medalDataInput, updateButtonHandler, inputHandler }) {
   const preventDefault = (event) => {
     event.preventDefault();
   };
@@ -24,27 +28,21 @@ function MedalForm({
             key={key}
             dataType={key}
             medalDataInput={medalDataInput}
-            setMedalDataInput={setMedalDataInput}
             inputHandler={inputHandler}
           />
         );
       })}
-      <MedalUpdateButton
-        medalData={medalData}
-        medalDataInput={medalDataInput}
-        setMedalData={setMedalData}
-        updateButtonHandler={updateButtonHandler}
-      >
-        국가 추가
-      </MedalUpdateButton>
-      <MedalUpdateButton
-        medalData={medalData}
-        medalDataInput={medalDataInput}
-        setMedalData={setMedalData}
-        updateButtonHandler={updateButtonHandler}
-      >
-        업데이트
-      </MedalUpdateButton>
+
+      {UPDATE_BUTTONS.map((button) => {
+        return (
+          <MedalUpdateButton
+            key={button.name}
+            name={button.name}
+            type={button.type}
+            updateButtonHandler={updateButtonHandler}
+          />
+        );
+      })}
     </form>
   );
 }

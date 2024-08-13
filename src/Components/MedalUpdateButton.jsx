@@ -1,11 +1,7 @@
-function MedalUpdateButton({ children, updateButtonHandler }) {
+function MedalUpdateButton({ type, name, updateButtonHandler }) {
   return (
-    <button
-      type={children === "업데이트" ? "button" : "submit"}
-      name={children}
-      onClick={updateButtonHandler}
-    >
-      {children}
+    <button type={type} name={name} onClick={updateButtonHandler}>
+      {name}
     </button>
   );
 }
