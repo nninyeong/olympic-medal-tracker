@@ -1,6 +1,7 @@
 const onlyNumRegex = /^\d+$/;
+const onlyBlankRegex = /^\s*$/;
 export const formValidation = (input) => {
-  if (input.country === "") {
+  if (onlyBlankRegex.test(input.country)) {
     return {
       isValid: false,
       message: "국가명을 입력해주세요.",
