@@ -6,24 +6,20 @@ import RankingTable from "./RankingTable";
 import MedalForm from "./MedalForm";
 import InputGuidance from "./InputGuidance";
 
+const INITIAL_INPUT_VALUE = {
+  country: "",
+  gold: "0",
+  silver: "0",
+  bronze: "0",
+  total: "0",
+};
+
 function MedalSection() {
   const [medalData, setMedalData] = useState([]);
-  const [medalDataInput, setMedalDataInput] = useState({
-    country: "",
-    gold: "0",
-    silver: "0",
-    bronze: "0",
-    total: "0",
-  });
+  const [medalDataInput, setMedalDataInput] = useState({ INITIAL_INPUT_VALUE });
 
   const initializeInput = () => {
-    setMedalDataInput({
-      country: "",
-      gold: "0",
-      silver: "0",
-      bronze: "0",
-      total: "0",
-    });
+    setMedalDataInput(INITIAL_INPUT_VALUE);
   };
 
   const [sortOption, setSortOption] = useState("금은동 우선순위 순");
