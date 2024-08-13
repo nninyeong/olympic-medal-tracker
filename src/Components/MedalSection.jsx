@@ -82,6 +82,11 @@ function MedalSection() {
         (data) => data.country === medalDataInput.country
       );
 
+      if (!updateCountryData) {
+        alert("등록되지 않은 국가입니다.");
+        return;
+      }
+
       for (let key in medalDataInput) {
         updateCountryData[key] = medalDataInput[key];
       }
