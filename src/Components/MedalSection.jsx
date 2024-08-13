@@ -39,53 +39,61 @@ function MedalSection() {
     setMedalDataInput(input);
   };
 
-  const updateButtonHandler = (event) => {
-    const name = event.currentTarget.name;
-
+  const updateButtonHandler = () => {
     const { isValid, message } = formValidation(medalDataInput);
     if (!isValid) {
       alert(message);
       return;
     }
 
-    let updatedMedalData = [];
-    if (name === "업데이트") {
-      const updateCountryData = medalData.find(
-        (data) => data.country === medalDataInput.country
-      );
+    const updateCountryData = medalData.find(
+      (data) => data.country === medalDataInput.country
+    );
 
-      if (!updateCountryData) {
-        alert("등록되지 않은 국가입니다.");
-        return;
-      }
-
-      for (let key in medalDataInput) {
-        updateCountryData[key] = medalDataInput[key];
-      }
-
-      updatedMedalData.total =
-        +updatedMedalData.gold +
-        updatedMedalData.silver +
-        updatedMedalData.bronze;
-      updatedMedalData = [...medalData];
-    } else {
-      let isDuplicate = medalData.some(
-        (data) => data.country === medalDataInput.country
-      );
-      if (isDuplicate) {
-        alert("이미 등록된 국가입니다.");
-        return;
-      }
-
-      updatedMedalData.total =
-        +medalDataInput.gold + medalDataInput.silver + medalDataInput.bronze;
-      updatedMedalData = [...medalData, medalDataInput];
+    if (!updateCountryData) {
+      alert("등록되지 않은 국가입니다.");
+      return;
     }
+
+    for (let key in medalDataInput) {
+      updateCountryData[key] = medalDataInput[key];
+    }
+
+    updateCountryData.total =
+      +updateCountryData.gold +
+      +updateCountryData.silver +
+      +updateCountryData.bronze;
 
     initializeInput();
 
+    const sortedData = sortData(medalData);
+    setMedalData(sortedData);
+  };
+
+  const addButtonHandler = () => {
+    const { isValid, message } = formValidation(medalDataInput);
+    if (!isValid) {
+      alert(message);
+      return;
+    }
+
+    let isDuplicate = medalData.some(
+      (data) => data.country === medalDataInput.country
+    );
+
+    if (isDuplicate) {
+      alert("이미 등록된 국가입니다.");
+      return;
+    }
+
+    const input = { ...medalDataInput };
+    input.total =
+      +medalDataInput.gold + +medalDataInput.silver + +medalDataInput.bronze;
+
+    let updatedMedalData = [...medalData, input];
     updatedMedalData = sortData(updatedMedalData);
     setMedalData(updatedMedalData);
+    initializeInput();
   };
 
   const deleteHandler = (selectedCountry) => {
@@ -118,6 +126,7 @@ function MedalSection() {
       <MedalForm
         id="userInput"
         medalDataInput={medalDataInput}
+        addButtonHandler={addButtonHandler}
         updateButtonHandler={updateButtonHandler}
         inputHandler={inputHandler}
       />

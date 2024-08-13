@@ -5,10 +5,10 @@ function MedalTableRow({
   return (
     <tr>
       <td>{country}</td>
-      <td>{gold}</td>
-      <td>{silver}</td>
-      <td>{bronze}</td>
-      <td>{total}</td>
+      <td>{+gold}</td>
+      <td>{+silver}</td>
+      <td>{+bronze}</td>
+      <td>{+total}</td>
       <td>
         <button
           type="button"
