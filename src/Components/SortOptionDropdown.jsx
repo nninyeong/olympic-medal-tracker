@@ -2,9 +2,12 @@ import { useState } from "react";
 import SortOptionMenu from "./SortOptionMenu.jsx";
 import "../css/sortOptionDropdown.css";
 
-function SortOptionDropdown({ sortOption, setSortOption }) {
-  const [showSortOptionMenu, setShowSortOptionMenu] = useState(false);
-
+function SortOptionDropdown({
+  sortOption,
+  showSortOptionMenu,
+  setShowSortOptionMenu,
+  selectOption,
+}) {
   return (
     <div id="sortOptionDropdown">
       <ul onClick={() => setShowSortOptionMenu(!showSortOptionMenu)}>
@@ -12,13 +15,7 @@ function SortOptionDropdown({ sortOption, setSortOption }) {
           {sortOption}
           {showSortOptionMenu ? "  -" : "  ▾"}
         </div>
-        {showSortOptionMenu && (
-          <SortOptionMenu
-            sortOption={sortOption}
-            setSortOption={setSortOption}
-            setShowSortOptionMenu={setShowSortOptionMenu}
-          />
-        )}
+        {showSortOptionMenu && <SortOptionMenu selectOption={selectOption} />}
       </ul>
     </div>
   );
