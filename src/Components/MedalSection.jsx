@@ -16,7 +16,7 @@ const INITIAL_INPUT_VALUE = {
 
 function MedalSection() {
   const [medalData, setMedalData] = useState([]);
-  const [medalDataInput, setMedalDataInput] = useState({ INITIAL_INPUT_VALUE });
+  const [medalDataInput, setMedalDataInput] = useState(INITIAL_INPUT_VALUE);
 
   const initializeInput = () => {
     setMedalDataInput(INITIAL_INPUT_VALUE);
