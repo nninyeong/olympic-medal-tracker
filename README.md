@@ -1,6 +1,6 @@
 # Olympic Medal Tracker
 개인 프로젝트로 진행한 올림픽 메달 트래커 입니다.
-- 제작 기간: 240809 ~ 240812
+- 제작 기간: 240809 ~ 240813
 - 개요
   - 나라별 메달수를 추가/수정/삭제할 수 있습니다. 금은동 우선순위순 배열, 총 메달 개수순 배열 중 선택하여 정렬합니다.
   - 입력한 데이터는 로컬스토리지에 저장되어 브라우저를 종료한 후에도 값이 유지됩니다.
@@ -45,16 +45,18 @@
 <br><br>
 
 # 컴포넌트 구조
-![image](https://github.com/user-attachments/assets/6316de1e-362c-4f03-9363-c2984fa5aa27)
+![image](https://github.com/user-attachments/assets/3f3d0597-0dcb-48ee-af3f-ad91e43cbd68)
+
 위 이미지에서 초록색 선으로 표시된 부분들을 컴포넌트로 분리했습니다.
 
-<App\/> 하위구조
-- Form
+<MedalSection\/> 하위구조
+- MedalForm
   - MedalInputField
-  - MedalUpdateButton
+  - AddBUtton
+  - UpdateButton
 - SortOptionDropdown
   - SortOptionMenu
-- RankingTable
+- RankingTable (데이터 존재하지 않는 경우 InputGuidance)
   - RankingItem
 
 <br><br>
