@@ -1,7 +1,9 @@
 import MedalTableRow from "./MedalTableRow";
+import { sortData } from "../util";
 import "../css/medalTable.css";
 
-function RankingTable({ medalData, deleteHandler }) {
+function RankingTable({ medalData, sortOption, deleteHandler }) {
+  const sortedData = sortData(medalData, sortOption);
   return (
     <div id="rankingTable">
       <table id="ranking">
@@ -16,7 +18,7 @@ function RankingTable({ medalData, deleteHandler }) {
           </tr>
         </thead>
         <tbody>
-          {medalData.map((data) => {
+          {sortedData.map((data) => {
             return (
               <MedalTableRow
                 key={data.country}

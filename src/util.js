@@ -32,3 +32,20 @@ export const formValidation = (input) => {
     isValid: true,
   };
 };
+
+export const sortData = (data, sortOption) => {
+  let sortedData = [...data];
+  if (sortOption === "금은동 우선순위") {
+    sortedData.sort((a, b) => {
+      if (+a.gold !== +b.gold) return b.gold - a.gold;
+      else if (+a.silver !== +b.silver) return b.silver - a.silver;
+      else return b.bronze - a.bronze;
+    });
+  } else if (sortOption === "총 메달수") {
+    sortedData.sort((a, b) => {
+      return b.total - a.total;
+    });
+  }
+
+  return sortedData;
+};

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { formValidation } from "../util.js";
+import { formValidation, sortData } from "../util.js";
 
 import SortOptionDropdown from "./SortOptionDropdown";
 import RankingTable from "./RankingTable";
@@ -39,34 +39,6 @@ function MedalSection() {
     setMedalDataInput(input);
   };
 
-  const sortData = (data) => {
-    let sortedData = [...data];
-    if (sortOption === "금은동 우선순위") {
-      sortedData.sort((a, b) => {
-        if (+a.gold !== +b.gold) return b.gold - a.gold;
-        else if (+a.silver !== +b.silver) return b.silver - a.silver;
-        else return b.bronze - a.bronze;
-      });
-    } else if (sortOption === "총 메달수") {
-      sortedData.sort((a, b) => {
-        return b.total - a.total;
-      });
-    }
-
-    return sortedData;
-  };
-
-  const countTotalMedal = (data) => {
-    data.total = 0;
-    data.total += data.gold + data.silver + data.bronze;
-  };
-
-  const convertValuesToNumber = (data) => {
-    data.gold = +data.gold;
-    data.silver = +data.silver;
-    data.bronze = +data.bronze;
-  };
-
   const updateButtonHandler = (event) => {
     const name = event.currentTarget.name;
 
@@ -91,8 +63,10 @@ function MedalSection() {
         updateCountryData[key] = medalDataInput[key];
       }
 
-      convertValuesToNumber(updateCountryData);
-      countTotalMedal(updateCountryData);
+      updatedMedalData.total =
+        +updatedMedalData.gold +
+        updatedMedalData.silver +
+        updatedMedalData.bronze;
       updatedMedalData = [...medalData];
     } else {
       let isDuplicate = medalData.some(
@@ -103,8 +77,8 @@ function MedalSection() {
         return;
       }
 
-      convertValuesToNumber(medalDataInput);
-      countTotalMedal(medalDataInput);
+      updatedMedalData.total =
+        +medalDataInput.gold + medalDataInput.silver + medalDataInput.bronze;
       updatedMedalData = [...medalData, medalDataInput];
     }
 
@@ -137,7 +111,7 @@ function MedalSection() {
       setMedalData(savedData);
       setInitialLoad(false);
     }
-  });
+  }, []);
 
   return (
     <>
@@ -156,7 +130,11 @@ function MedalSection() {
       {medalData.length === 0 ? (
         <InputGuidance />
       ) : (
-        <RankingTable medalData={medalData} deleteHandler={deleteHandler} />
+        <RankingTable
+          medalData={medalData}
+          sortOption={sortOption}
+          deleteHandler={deleteHandler}
+        />
       )}
     </>
   );
