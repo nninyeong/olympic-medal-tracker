@@ -143,10 +143,7 @@ function MedalSection() {
     <>
       <MedalForm
         id="userInput"
-        medalData={medalData}
-        setMedalData={setMedalData}
         medalDataInput={medalDataInput}
-        setMedalDataInput={setMedalDataInput}
         updateButtonHandler={updateButtonHandler}
         inputHandler={inputHandler}
       />
