@@ -28,8 +28,9 @@
 
 <br>
 
-![onlynum](https://github.com/user-attachments/assets/1265a3d3-353f-4cef-8258-ea34f064eb7e)
-메달 수를 입력하는 곳에 숫자가 아닌 값을 입력하는 경우 alert창이 뜨며 입력이 반영되지 않습니다.
+![유효성검사_out](https://github.com/user-attachments/assets/3722d253-b147-4eb8-9ec8-bf17a028130a)
+
+국가명에 빈칸을 입력하지 않았는지, 메달 수에 숫자 외의 값을 넣지 않았는지 유효성검사를 진행합니다.
 
 <br>
 
@@ -41,6 +42,15 @@
 ![mediaQueryDelete_out](https://github.com/user-attachments/assets/579b943c-13ba-42ea-aee7-83ab5db26195)
 
 미디어쿼리를 이용해 레이아웃의 넓이를 조정하였고, 삭제 버튼을 통해 메달 정보 삭제 또한 가능합니다.
+
+![스크린샷 2024-08-14 오전 10 35 07](https://github.com/user-attachments/assets/076b9ed0-4af0-4785-9ee0-ad5bc9f42055)
+
+등록된 국가가 없는 경우 InputGuidance 컴포넌트가 렌더되도록 했습니다.
+
+![스크린샷 2024-08-14 오전 10 35 37](https://github.com/user-attachments/assets/339477cf-5bb6-40df-84b3-33436e61e436)
+
+등록되지 않은 국가에대해 업데이트하려는 경우 alert으로 알린 후 처리하지 않습니다.
+
 
 <br><br>
 
