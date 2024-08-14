@@ -1,6 +1,7 @@
 import MedalInputField from "./MedalInputField.jsx";
 import AddButton from "./AddButton.jsx";
 import UpdateButton from "./UpdateButton.jsx";
+import { FORM_LIST } from "../constant.js";
 import "../css/form.css";
 
 function MedalForm({
@@ -15,15 +16,15 @@ function MedalForm({
 
   return (
     <form id="userInput" onSubmit={preventDefault}>
-      {Object.keys(medalDataInput).map((key) => {
-        if (key === "total") return;
-
+      {FORM_LIST.map((form) => {
         return (
           <MedalInputField
-            key={key}
-            dataType={key}
-            medalDataInput={medalDataInput}
+            key={form.dataType}
+            dataType={form.dataType}
+            type={form.type}
+            label={form.label}
             inputHandler={inputHandler}
+            medalDataInput={medalDataInput}
           />
         );
       })}

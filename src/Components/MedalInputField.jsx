@@ -1,16 +1,15 @@
-const FIELD_TITLE = {
-  country: "국가명",
-  gold: "금메달 수",
-  silver: "은메달 수",
-  bronze: "동메달 수",
-};
-
-function MedalInputField({ dataType, medalDataInput, inputHandler }) {
+function MedalInputField({
+  dataType,
+  type,
+  label,
+  medalDataInput,
+  inputHandler,
+}) {
   return (
     <div className="medalInputField">
-      <h3>{FIELD_TITLE[dataType]}</h3>
+      <h3>{label}</h3>
       <input
-        type="text"
+        type={type}
         id={dataType}
         onChange={inputHandler}
         value={medalDataInput[dataType]}
