@@ -66,8 +66,7 @@ function MedalSection() {
 
     initializeInput();
 
-    const sortedData = sortData(medalData);
-    setMedalData(sortedData);
+    setMedalData([...medalData]);
   };
 
   const addButtonHandler = () => {
@@ -91,7 +90,6 @@ function MedalSection() {
       +medalDataInput.gold + +medalDataInput.silver + +medalDataInput.bronze;
 
     let updatedMedalData = [...medalData, input];
-    updatedMedalData = sortData(updatedMedalData);
     setMedalData(updatedMedalData);
     initializeInput();
   };
@@ -102,11 +100,6 @@ function MedalSection() {
     );
     setMedalData(filteredData);
   };
-
-  useEffect(() => {
-    let sortedData = sortData(medalData);
-    setMedalData(sortedData);
-  }, [sortOption]);
 
   useEffect(() => {
     if (initialLoad) return;

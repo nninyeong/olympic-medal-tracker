@@ -4,6 +4,8 @@ function MedalTableRow({
 }) {
   return (
     <tr>
+      {/* onFocus={(e) => e.target.value === "0" && setBronze("")}
+      onBlur={(e) => e.target.value === "" && setBronze(0)} */}
       <td>{country}</td>
       <td>{+gold}</td>
       <td>{+silver}</td>
